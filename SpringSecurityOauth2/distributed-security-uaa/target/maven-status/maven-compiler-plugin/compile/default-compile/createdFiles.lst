@@ -1,0 +1,8 @@
+com\tuoheng\model\UserDto.class
+com\tuoheng\UAAServer.class
+com\tuoheng\service\SpringDataUserDetailsService.class
+com\tuoheng\model\PermissionDto.class
+com\tuoheng\config\AuthorizationServerConfig.class
+com\tuoheng\dao\UserDao.class
+com\tuoheng\config\TokenConfig.class
+com\tuoheng\config\WebSecurityConfig.class
