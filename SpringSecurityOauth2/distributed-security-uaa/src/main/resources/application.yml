@@ -1,0 +1,64 @@
+#feign:
+#  compression:
+#    request:
+#      enabled: true
+#      mime-types:
+#        - text/xml
+#        - application/xml
+#        - application/json
+#      min-request-size: 2048
+#    response:
+#      enabled: true
+#  hystrix:
+#    enabled: true
+logging:
+  level:
+    org:
+      springframework:
+        web: info
+    root: debug
+
+# 默认情况下启用除shutdown以外的端点, include属性列出了公开的端点id, exclude属性列出不应公开的端点id
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info,env
+
+
+server:
+  port: 53020
+  servlet:
+    context-path: /uaa
+
+  tomcat:
+    protocol_header: x-forwarded-proto
+    remote_ip_header: x-forwarded-for
+  use-forward-headers: true
+
+spring:
+  application:
+    name: uaa-service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    password: 123456
+    url: jdbc:mysql://localhost:3306/user_db?serverTimezone=GMT%2B8&characterEncoding=utf-8&useSSL=false
+    username: root
+  #一款模板引擎
+  freemarker:
+    charset: utf-8
+    content-type: text/html
+    enabled: true
+    request-context-attribute: rc
+    suffix: .html
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  main:
+    allow-bean-definition-overriding: true
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
