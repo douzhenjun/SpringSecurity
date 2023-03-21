@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+</head>
+
+<body>
+
+<form action="/user/login" method="post">
+    <label for="username">用户名：</label>
+    <input type="text" name="username" id="username">
+
+    <label for="password">密码：</label>
+    <input type="password" name="password" id="password">
+
+    <!--必须是submit类型。如果是button类型，点击后不会请求-->
+    <button type="submit">登录</button>
+</form>
+
+</body>
+</html>
