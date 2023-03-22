@@ -1,7 +1,6 @@
-package com.tuoheng.spring_security_demo02.controller;
+package com.tuoheng.demo_03.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2023/3/19
  */
 @RestController
-@RequestMapping("/index")
 public class HelloController {
     
     @RequestMapping("/hello")

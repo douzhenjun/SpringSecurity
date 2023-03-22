@@ -1,13 +1,13 @@
-package com.tuoheng.spring_security_demo02;
+package com.tuoheng.spring_security_demo01;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringSecurityDemo02Application {
+public class SpringSecurityDemo01Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringSecurityDemo02Application.class, args);
+        SpringApplication.run(SpringSecurityDemo01Application.class, args);
     }
 
 }

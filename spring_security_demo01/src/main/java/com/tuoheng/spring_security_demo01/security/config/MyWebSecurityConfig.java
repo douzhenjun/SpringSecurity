@@ -1,9 +1,17 @@
-package com.tuoheng.spring_security_demo02.security;
+package com.tuoheng.spring_security_demo01.security.config;
 
+import com.tuoheng.spring_security_demo01.security.handler.MyAuthenticationSuccessHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @author dou_zhenjun
@@ -22,6 +30,8 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().formLogin()
                 .loginPage("/login.html")
                 .loginProcessingUrl("/doLogin")
+                .successHandler(new MyAuthenticationSuccessHandler())//登录成功后,后端页面通过此处理器返回一个json
+                .failureForwardUrl("/login.html")//登录失败后转发到/login.html
                 .and().csrf().disable();
     }
 }

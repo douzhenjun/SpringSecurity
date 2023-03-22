@@ -12,8 +12,7 @@
     <groupId>com.tuoheng</groupId>
     <artifactId>springboot_springsecurity_demos</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>springboot_springsecurity_demos</name>
-    <description>springboot_springsecurity_demos</description>
+    
 
     <packaging>pom</packaging>
 
