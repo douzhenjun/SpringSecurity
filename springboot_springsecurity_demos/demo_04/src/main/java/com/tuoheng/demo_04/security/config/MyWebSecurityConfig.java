@@ -66,7 +66,6 @@ public class MyWebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()     //开启认证
-//                .antMatchers("/doLogin").permitAll()
                 .anyRequest().authenticated()                       //其他请求将走认证
                 .and().formLogin()                                  //允许表单提交
 //                .successHandler(new MyAuthenticationSuccessHandler())//登录成功后,后端页面通过此处理器返回一个json
