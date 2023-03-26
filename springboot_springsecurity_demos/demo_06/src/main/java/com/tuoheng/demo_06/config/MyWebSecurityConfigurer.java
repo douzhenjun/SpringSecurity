@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -38,11 +41,16 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         return kaptchaFilter;
     }
 
+    //第二种方式实现自定义加密
+    @Bean
+    public PasswordEncoder MyPasswordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
     /*配置数据源信息*/
     @Bean
     public UserDetailsService UserDetailsService(){
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("zhangsan").password("{noop}123123").roles("admin").build());
+        userDetailsManager.createUser(User.withUsername("zhangsan").password("$2a$10$41s9EWtMyLw2Py1DKRIKk.GAwj00vQYHglkpFMC6cagxRU07C6Gm6").roles("admin").build());
         return userDetailsManager;
     }
 
