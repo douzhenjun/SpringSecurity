@@ -1,4 +1,4 @@
-package com.tuoheng.demo_06.exception;
+package com.tuoheng.demo_07.exception;
 
 import org.springframework.security.core.AuthenticationException;
 

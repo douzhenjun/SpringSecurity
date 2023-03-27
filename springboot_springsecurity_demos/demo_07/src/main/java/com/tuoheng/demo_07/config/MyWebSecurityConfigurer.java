@@ -1,6 +1,7 @@
 package com.tuoheng.demo_07.config;
 
 
+import com.tuoheng.demo_07.filter.KaptchaFilter;
 import com.tuoheng.demo_07.filter.LoginFilter;
 import com.tuoheng.demo_07.handler.MyAuthenticationFailureHandler;
 import com.tuoheng.demo_07.handler.MyAuthenticationSuccessHandler;
@@ -19,7 +20,20 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
-    
+
+    @Bean
+    public KaptchaFilter getKaptchaFilter() throws Exception {
+        KaptchaFilter kaptchaFilter = new KaptchaFilter();
+        kaptchaFilter.setAuthenticationManager(authenticationManagerBean());
+        //指定登录成功和登录失败后处理器
+        kaptchaFilter.setAuthenticationSuccessHandler(new MyAuthenticationSuccessHandler());
+        kaptchaFilter.setAuthenticationFailureHandler(new MyAuthenticationFailureHandler());
+        //指定登录处理
+        kaptchaFilter.setFilterProcessesUrl("/doLogin");
+        return kaptchaFilter;
+    }
+
+
     @Autowired
     private UserDetailsService myUserDatailsService;
     
@@ -50,12 +64,13 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests()
+                .mvcMatchers("/vc.jpg").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .and()
                 .csrf().disable();
         
-        http.addFilterAt(getLoginFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(getKaptchaFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 }

@@ -1,5 +1,6 @@
 package com.tuoheng.demo_06.config;
 
+import com.tuoheng.demo_06.constant.Constants;
 import com.tuoheng.demo_06.filter.KaptchaFilter;
 import com.tuoheng.demo_06.handler.MyAuthenticationFailureHandler;
 import com.tuoheng.demo_06.handler.MyAuthenticationSuccessHandler;
@@ -14,6 +15,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.DelegatingPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -31,7 +33,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     public KaptchaFilter getKaptchaFilter() throws Exception {
         KaptchaFilter kaptchaFilter = new KaptchaFilter();
         //指定接受验证码请求参数名
-        kaptchaFilter.setKaptchaKey("kaptcha");
+//        kaptchaFilter.setKaptchaKey("kaptcha");
         kaptchaFilter.setAuthenticationManager(authenticationManagerBean());
         //指定登录成功和登录失败后处理器
         kaptchaFilter.setAuthenticationSuccessHandler(new MyAuthenticationSuccessHandler());
@@ -42,15 +44,15 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     //第二种方式实现自定义加密
-    @Bean
-    public PasswordEncoder MyPasswordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder MyPasswordEncoder(){
+//        return new BCryptPasswordEncoder();
+//    }
     /*配置数据源信息*/
     @Bean
     public UserDetailsService UserDetailsService(){
         InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-        userDetailsManager.createUser(User.withUsername("zhangsan").password("$2a$10$41s9EWtMyLw2Py1DKRIKk.GAwj00vQYHglkpFMC6cagxRU07C6Gm6").roles("admin").build());
+        userDetailsManager.createUser(User.withUsername("zhangsan").password("{"+Constants.PREFIX_PASSWORD_ENCODER+"}"+new BCryptPasswordEncoder().encode("123123")).roles("admin").build());
         return userDetailsManager;
     }
 

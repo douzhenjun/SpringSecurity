@@ -8,9 +8,9 @@ import lombok.Data;
  */
 @Data
 public class UserRole {
-    private int id;
+    private Integer id;
     
-    private int uid;
+    private Integer uid;
     
-    private int rid;
+    private Integer rid;
 }
