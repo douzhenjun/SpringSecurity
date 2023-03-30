@@ -1,14 +1,13 @@
-package com.tuoheng.demo_08;
+package com.tuoheng.demo_09;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-/*RememberMe实现*/
 @SpringBootApplication
-public class Demo08Application {
+public class Demo09Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Demo08Application.class, args);
+        SpringApplication.run(Demo09Application.class, args);
     }
 
 }
