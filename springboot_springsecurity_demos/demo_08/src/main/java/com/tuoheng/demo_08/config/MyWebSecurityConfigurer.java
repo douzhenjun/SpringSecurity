@@ -18,17 +18,17 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
-//    @Bean
-//    public UserDetailsService getUserDetailService(){
-//        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
-//        userDetailsManager.createUser(User.withUsername("zhangsan").password("{noop}123").roles("admin").build());
-//        return userDetailsManager;
-//    }
-//
-//    @Override
-//    public void configure(AuthenticationManagerBuilder builder) throws Exception {
-//        builder.userDetailsService(getUserDetailService());
-//    }
+    @Bean
+    public UserDetailsService getUserDetailService(){
+        InMemoryUserDetailsManager userDetailsManager = new InMemoryUserDetailsManager();
+        userDetailsManager.createUser(User.withUsername("zhangsan").password("{noop}123").roles("admin").build());
+        return userDetailsManager;
+    }
+
+    @Override
+    public void configure(AuthenticationManagerBuilder builder) throws Exception {
+        builder.userDetailsService(getUserDetailService());
+    }
 
     @Override
     public void configure(HttpSecurity http) throws Exception {

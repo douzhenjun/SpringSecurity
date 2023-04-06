@@ -1,0 +1,27 @@
+@startuml
+title Oauth2.0授权流程
+
+participant 用户 as user
+participant 应用程序 as application
+participant 微信 as weixin
+
+autonumber
+activate user
+user -> application: 访问登录页面
+activate application
+application -> weixin: 请求认证
+deactivate application
+activate weixin
+weixin -> user: 返回确认授权页面
+user -> weixin: 确认
+deactivate user
+weixin -> application: 授权码
+activate application
+application -> weixin: 发送tokenUrl, 申请令牌
+weixin -> application: 返回令牌
+application -> weixin: 请求获取用户信息
+weixin -> weixin: 校验令牌的合法性
+weixin -> application: 响应用户信息
+deactivate weixin
+application -> application: 显示用户信息
+@enduml

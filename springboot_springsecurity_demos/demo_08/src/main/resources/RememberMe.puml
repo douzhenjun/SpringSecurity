@@ -1,0 +1,59 @@
+@startuml
+title RememberMe原理
+
+actor User as user
+participant AbstractAuthenticationProcessingFilter as aapf
+participant TokenBasedRememberMeServices as tbrms
+participant InMemoryUserDetailsManager as iudm
+participant RememberMeAuthenticationFilter as rmaf
+participant AbstractRememberMeServices as arms
+
+autonumber
+activate user
+user -> aapf: 第一次登录,\n选择记住我功能
+deactivate user
+activate aapf
+aapf -> aapf: 调用attemptAuthentication方法,\n返回authRequest
+aapf -> aapf: 调用successfulAuthentication方法
+aapf -> tbrms: 回调loginSuccess方法
+deactivate aapf
+activate tbrms
+tbrms -> tbrms: 获得authRequest的用户名和密码
+tbrms -> iudm: 回调loadUserByUsername方法
+activate iudm
+iudm -> tbrms: 返回一个UserDetails对象
+deactivate iudm
+tbrms -> aapf: 获得用户信息和过期时间,\n利用MD5生成一个token签名,\n将token保存到请求体的cookie中
+deactivate tbrms
+activate aapf
+aapf -> aapf: 完成剩余认证步骤...
+aapf -> user: 登录成功
+activate user
+user -> user: 等待session过期
+user -> aapf: 发起第二次登录
+deactivate
+aapf -> rmaf: 回调autoLogin方法
+deactivate aapf
+activate rmaf
+rmaf -> rmaf: 获得name为remember-me的cookie,\n调用decodeCookie方法对cookie解析,\n返回cookieTokens[username,expiryTime,token]
+rmaf -> tbrms: 调用processAutoLoginCookie方法
+deactivate rmaf
+activate tbrms
+tbrms -> tbrms: 判断token是否过期,\n若过期,抛出异常,提醒用户重新登录
+tbrms -> iudm: 若未过期,调用loadUserByUsername方法,\n传入cookieTokens[0]
+activate iudm
+iudm -> tbrms: 返回一个UserDetails对象
+deactivate iudm
+tbrms -> tbrms: 根据UserDetails的用户信息和tokenExipryTime,\n制作一个新的TokenSignature
+tbrms -> arms: 返回UserDetails
+deactivate tbrms
+activate arms
+arms -> rmaf: 调用createSuccessfulAuthentication方法,\n返回一个RememberMe认证对象
+deactivate arms
+activate rmaf
+rmaf -> rmaf: 调用ProviderManager.authenticate方法,\n返回一个完整的RememberMe认证对象
+rmaf -> rmaf: 把RememberMe认证对象放到\n SpringContextHolder.SecurityContext对象中
+rmaf -> rmaf: 完成剩余认证步骤...
+rmaf -> user: 登录成功
+activate user
+@enduml
