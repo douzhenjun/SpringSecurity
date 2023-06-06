@@ -3,37 +3,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.5</version>
-        <relativePath/>
+        <groupId>com.tuoheng</groupId>
+        <artifactId>springboot_springsecurity_demos</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
     <groupId>com.tuoheng</groupId>
-    <artifactId>springboot_springsecurity_demos</artifactId>
+    <artifactId>demo_12</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    
-
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>demo_01</module>
-        <module>demo_02</module>
-        <module>demo_03</module>
-        <module>demo_04</module>
-        <module>demo_05</module>
-        <module>demo_06</module>
-        <module>demo_07</module>
-        <module>demo_08</module>
-        <module>demo_09</module>
-        <module>demo_10</module>
-        <module>demo_11</module>
-        <module>demo_12</module>
-    </modules>
-
-    <properties>
-        <java.version>11</java.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -48,18 +25,19 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.38</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.8</version>
         </dependency>
-
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.2.2</version>
         </dependency>
     </dependencies>
 

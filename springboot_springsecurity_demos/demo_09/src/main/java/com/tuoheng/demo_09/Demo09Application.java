@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /*前后端分离时, 实现RememberMe功能, 借助postman向后端传入json字符串
 * uname,passwd,remember-me="on"
-* 测试时设置session过期时间要短
-* */
+* 测试时设置session过期时间要短*/
 @SpringBootApplication
 public class Demo09Application {
 
